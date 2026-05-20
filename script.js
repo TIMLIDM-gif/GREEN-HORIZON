@@ -34,7 +34,7 @@ function getIndonesianVoice(){
 }
 
 // Fungsi Text-to-Speech
-function speak(text){
+function speak(text, onEnd){
   if('speechSynthesis' in window){
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
@@ -48,17 +48,23 @@ function speak(text){
     utterance.rate = 0.9;
     utterance.pitch = 1.15;
     utterance.volume = 1;
+    if(typeof onEnd === 'function'){
+      utterance.onend = onEnd;
+      utterance.onerror = onEnd;
+    }
     window.speechSynthesis.speak(utterance);
+  } else if(typeof onEnd === 'function'){
+    onEnd();
   }
 }
 
 // Membaca Teks (untuk aksesibilitas)
-function announce(text){
+function announce(text, onEnd){
   const sr = document.getElementById('srAnnounce');
   if(sr){
     sr.textContent = text;
   }
-  speak(text);
+  speak(text, onEnd);
 }
 
 // Memainkan efek suara gerak
@@ -261,12 +267,7 @@ function renderStatus(){
 /*
   LEMPAR DADU
 */
-function rollDice(){
-  if(waitingQuestion || gameFinished) return;
-
-  const player = players[currentTurn];
-  announce(`Giliran ${player.name}. Posisi saat ini di kotak ${player.position}. Silakan lempar dadu.`);
-
+function startDiceRoll(){
   const dice = document.getElementById("dice");
   const btn = document.getElementById("rollBtn");
 
@@ -295,6 +296,16 @@ function rollDice(){
       });
     }
   },80);
+}
+
+function rollDice(){
+  if(waitingQuestion || gameFinished) return;
+
+  const player = players[currentTurn];
+  const btn = document.getElementById("rollBtn");
+
+  btn.disabled = true;
+  announce(`Giliran ${player.name}. Posisi saat ini di kotak ${player.position}. Silakan lempar dadu.`, startDiceRoll);
 }
 
 /*
