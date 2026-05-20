@@ -16,7 +16,18 @@ document.addEventListener('click', function unlockAudio(){
 // Mencari Suara Bahasa Indonesia untuk Screen Reader
 function getIndonesianVoice(){
   const voices = window.speechSynthesis.getVoices();
-  return voices.find(voice => voice.lang.toLowerCase().startsWith('id'))
+  if(!voices.length) return null;
+
+  const indonesianVoices = voices.filter(voice => 
+    voice.lang.toLowerCase().startsWith('id') ||
+    voice.lang.toLowerCase().includes('indo') ||
+    voice.name.toLowerCase().includes('indonesia')
+  );
+
+  const femaleVoice = indonesianVoices.find(voice => /female|wanita|femina|siti|ayu|rina|diah|google bahasa indonesia/i.test(voice.name));
+  if(femaleVoice) return femaleVoice;
+
+  return indonesianVoices[0] || voices.find(voice => voice.lang.toLowerCase().startsWith('id'))
       || voices.find(voice => voice.lang.toLowerCase().includes('indo'))
       || voices.find(voice => voice.name.toLowerCase().includes('indonesia'))
       || voices[0] || null;
@@ -34,8 +45,9 @@ function speak(text){
     } else {
       utterance.lang = 'id-ID';
     }
-    utterance.rate = 0.95;
-    utterance.pitch = 1;
+    utterance.rate = 0.9;
+    utterance.pitch = 1.15;
+    utterance.volume = 1;
     window.speechSynthesis.speak(utterance);
   }
 }
