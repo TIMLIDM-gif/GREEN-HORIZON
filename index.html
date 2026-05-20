@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papan Penyelamat Bumi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h1>PAPAN PENYELAMAT BUMI</h1>
+
+  <!-- HALAMAN LANDING -->
+  <section id="landing" class="card">
+    <div class="landing-split">
+      <div class="landing-left">
+        <h2>Selamat Datang</h2>
+        <p>Pelajari dampak pemanasan global dan mainkan permainan untuk membantu menyelamatkan bumi.</p>
+
+        <div class="media-card">
+          <p><strong>Pemanasan Global</strong> terjadi karena aktivitas manusia yang menghasilkan gas rumah kaca, menyebabkan suhu bumi naik, es mencair, dan cuaca ekstrem.</p>
+        </div>
+      </div>
+
+      <div class="landing-right">
+        <h2>Mulai Sekarang</h2>
+        <p>Untuk memahami materi dan memainkan game edukasi.</p>
+        <button onclick="showMenu()">Mulai</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HALAMAN MENU UTAMA -->
+  <section id="menu" class="card hidden">
+    <h2>Pilih Aktivitas</h2>
+    <div class="menu-split">
+      <div class="menu-card">
+        <h3>Materi</h3>
+        <p>Pelajari dasar pemanasan global dan dampaknya terhadap bumi sebelum bermain.</p>
+        <button onclick="showMateri()">Buka Materi</button>
+      </div>
+      <div class="menu-card">
+        <h3>Permainan</h3>
+        <p>Mainkan game papan untuk menjawab soal dan bergerak di papan pembelajaran.</p>
+        <button onclick="showPermainan()">Mainkan</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HALAMAN MATERI -->
+  <section id="materi" class="card hidden">
+    <h2>Materi Pemanasan Global</h2>
+    <p>Pemanasan global adalah kenaikan suhu rata-rata atmosfer dan lautan yang diakibatkan oleh emisi gas rumah kaca. Efeknya mencakup naiknya permukaan air laut, hilangnya habitat, dan perubahan pola cuaca.</p>
+    <p>Permainan ini membantu menguji wawasanmu tentang pemanasan global sekaligus menyadari pentingnya menjaga planet kita.</p>
+    <button onclick="showMenu()">Kembali ke Menu</button>
+  </section>
+
+  <!-- HALAMAN SETUP PEMAIN -->
+  <section id="setup" class="card hidden">
+    <h2>Masukkan Nama Pemain</h2>
+
+    <input id="p1" placeholder="Pemain 1">
+    <input id="p2" placeholder="Pemain 2">
+    <input id="p3" placeholder="Pemain 3">
+    <input id="p4" placeholder="Pemain 4">
+
+    <button onclick="startGame()">Mulai Game</button>
+  </section>
+
+  <!-- HALAMAN GAME -->
+  <section id="game" class="hidden">
+    <div class="game-layout">
+
+      <!-- PANEL KIRI: Kontrol & Status -->
+      <aside class="left-panel">
+        <div class="top-panel">
+          <div>
+            <h2>Giliran: <span id="turnName"></span></h2>
+            <p>Dadu: <span id="diceResult">-</span></p>
+          </div>
+          <div id="dice" class="dice">🎲</div>
+          <button id="rollBtn" onclick="rollDice()">
+            Lempar Dadu
+          </button>
+        </div>
+
+        <div class="player-status-panel">
+          <h2>Status Pemain</h2>
+          <div id="playerStatus"></div>
+        </div>
+      </aside>
+
+      <!-- AREA PAPAN -->
+      <div class="board-area">
+        <img src="https://raw.githubusercontent.com/nandaalifia57-ctrl/PARABOOMa/9ca1187269118df3b4ffc735329942c457331118/board.png" class="board-img" alt="Papan Permainan">
+        <div id="pawnLayer"></div>
+      </div>
+
+      <!-- PANEL KANAN: Soal & Log -->
+      <aside class="side-panel">
+        <div id="questionBox" class="question-box hidden"></div>
+        <h2>Log Permainan</h2>
+        <div id="logBox"></div>
+      </aside>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- SCREEN READER ANNOUNCER -->
+<div id="srAnnounce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
