@@ -19,16 +19,13 @@ function getIndonesianVoice(){
   if(!voices.length) return null;
 
   const indonesianVoices = voices.filter(voice => 
-    /(^id|indo|indonesia)/i.test(voice.lang) ||
-    /indonesia/i.test(voice.name)
+    voice.lang.toLowerCase().startsWith('id') ||
+    voice.lang.toLowerCase().includes('indo') ||
+    voice.name.toLowerCase().includes('indonesia')
   );
 
-  const femaleKeywords = /(female|wanita|woman|lady|girl|siti|ayu|rina|diah|wati|nina|lisa|lisa|maria|anna|nina|nina|ayu|rina)/i;
-  const femaleVoice = indonesianVoices.find(voice => femaleKeywords.test(voice.name));
+  const femaleVoice = indonesianVoices.find(voice => /female|wanita|femina|siti|ayu|rina|diah|google bahasa indonesia/i.test(voice.name));
   if(femaleVoice) return femaleVoice;
-
-  const femaleAny = voices.find(voice => femaleKeywords.test(voice.name));
-  if(femaleAny) return femaleAny;
 
   return indonesianVoices[0] || voices.find(voice => voice.lang.toLowerCase().startsWith('id'))
       || voices.find(voice => voice.lang.toLowerCase().includes('indo'))
@@ -48,8 +45,8 @@ function speak(text){
     } else {
       utterance.lang = 'id-ID';
     }
-    utterance.rate = 0.95;
-    utterance.pitch = 1.2;
+    utterance.rate = 0.9;
+    utterance.pitch = 1.15;
     utterance.volume = 1;
     window.speechSynthesis.speak(utterance);
   }
