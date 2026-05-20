@@ -137,28 +137,29 @@ const gwQuestions = [
 /*
   NAVIGASI MENU
 */
+function hideAllSections(){
+  ['landing', 'menu', 'materi', 'setup', 'game'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.add('hidden');
+  });
+}
+
 function showMenu(){
-  document.getElementById('landing').classList.add('hidden');
-  document.getElementById('materi').classList.add('hidden');
-  document.getElementById('setup').classList.add('hidden');
-  document.getElementById('game').classList.add('hidden');
-  document.getElementById('menu').classList.remove('hidden');
+  hideAllSections();
+  const menu = document.getElementById('menu');
+  if(menu) menu.classList.remove('hidden');
 }
 
 function showMateri(){
-  document.getElementById('landing').classList.add('hidden');
-  document.getElementById('menu').classList.add('hidden');
-  document.getElementById('setup').classList.add('hidden');
-  document.getElementById('game').classList.add('hidden');
-  document.getElementById('materi').classList.remove('hidden');
+  hideAllSections();
+  const materi = document.getElementById('materi');
+  if(materi) materi.classList.remove('hidden');
 }
 
 function showPermainan(){
-  document.getElementById('landing').classList.add('hidden');
-  document.getElementById('menu').classList.add('hidden');
-  document.getElementById('materi').classList.add('hidden');
-  document.getElementById('game').classList.add('hidden');
-  document.getElementById('setup').classList.remove('hidden');
+  hideAllSections();
+  const setup = document.getElementById('setup');
+  if(setup) setup.classList.remove('hidden');
 }
 
 /*
